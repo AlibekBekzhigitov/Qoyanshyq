@@ -1,14 +1,18 @@
-import pygame
-import random
+import os
 import sys
+import random
+import pygame
+import imageio
 
 # =====================================================================
-# 1. GRID & DISPLAY CONFIGURATION
+# 1. CONSTANTS & DISPLAY SETUP
 # =====================================================================
+SCREEN_W = 1060
+SCREEN_H = 700
+
 CELL_SIZE = 30
-GRID_BUS_W, GRID_BUS_H = 16, 5
-
-SCREEN_W, SCREEN_H = 1060, 700
+GRID_BUS_W = 16
+GRID_BUS_H = 5
 FPS = 6
 
 # Color Palette
@@ -30,7 +34,7 @@ COLOR_CABIN_WALL = (30, 39, 46)
 COLOR_TARGET_AGENT = (46, 204, 113)  # Audit benchmark agent (emerald green)
 COLOR_TARGET_TAG = (255, 255, 255)
 COLOR_CTRL_UNIFORM = (214, 48, 49)   # Inspection patrol (crimson red)
-COLOR_COMMUTER = (142, 68, 173)      # Commuter flow (purple)
+COLOR_COMMUTER = (142, 68, 173)      # Commuter background flow (purple)
 COLOR_OPERATOR = (45, 52, 54)        # Driver / Transit operator
 COLOR_SKIN = (255, 218, 185)
 
@@ -54,6 +58,7 @@ for row in [2, 4, 6, 8]:
 step_stride = len(route_cells) // 20
 STOPS = [route_cells[i * step_stride] for i in range(20)]
 
+
 # =====================================================================
 # 3. PROCEDURAL SPRITE ASSETS
 # =====================================================================
@@ -62,6 +67,7 @@ def draw_seat(surface, rect):
     backrest = pygame.Rect(rect.x + 2, rect.y + 2, rect.width - 4, 7)
     pygame.draw.rect(surface, COLOR_SEAT_BACK, backrest, border_radius=2)
     pygame.draw.rect(surface, (30, 45, 75), rect, width=1, border_radius=4)
+
 
 def draw_sliding_door(surface, rect, is_open):
     pygame.draw.rect(surface, (20, 20, 20), rect)
@@ -74,6 +80,7 @@ def draw_sliding_door(surface, rect, is_open):
     else:
         pygame.draw.rect(surface, (120, 125, 135), rect)
         pygame.draw.line(surface, (60, 65, 75), (rect.centerx, rect.top), (rect.centerx, rect.bottom), 2)
+
 
 def draw_humanoid(surface, rect, shirt_color, is_operator=False, is_ctrl=False):
     cx, cy = rect.centerx, rect.centery
@@ -89,6 +96,7 @@ def draw_humanoid(surface, rect, shirt_color, is_operator=False, is_ctrl=False):
     elif is_ctrl:
         cap = pygame.Rect(head_pos[0] - 5, head_pos[1] - 6, 10, 3)
         pygame.draw.rect(surface, (150, 0, 0), cap)
+
 
 def draw_audit_agent(surface, rect):
     """Renders the adversarial benchmark agent evaluating blind spots."""
@@ -106,10 +114,11 @@ def draw_audit_agent(surface, rect):
     pygame.draw.rect(surface, COLOR_TARGET_TAG, tag_l, border_radius=2)
     pygame.draw.rect(surface, COLOR_TARGET_TAG, tag_r, border_radius=2)
 
+
 # =====================================================================
 # 4. SIMULATION & AUDIT ENGINE
 # =====================================================================
-class TransitAuditSimulation:
+class BusGridPlayer:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
@@ -118,6 +127,8 @@ class TransitAuditSimulation:
         self.font = pygame.font.SysFont("Menlo, Consolas, monospace", 13)
         self.bold_font = pygame.font.SysFont("Menlo, Consolas, monospace", 15, bold=True)
         self.title_font = pygame.font.SysFont("Menlo, Consolas, monospace", 18, bold=True)
+
+        self.frames_buffer = []
         self.reset()
 
     def reset(self):
@@ -218,7 +229,7 @@ class TransitAuditSimulation:
                 self.doors_open = False
                 self.dwell_ticks = 0
                 self.bus_route_idx += 1
-            return
+            return True
 
         if self.bus_route_idx + 1 < len(route_cells):
             self.bus_route_idx += 1
@@ -229,8 +240,10 @@ class TransitAuditSimulation:
             if head in STOPS:
                 self.is_at_stop = True
                 self.current_stop_num = STOPS.index(head) + 1
+            return True
         else:
-            self.status_msg = "Audit cycle complete. Press [R] to re-run benchmark."
+            self.status_msg = "Route complete. Saving recording..."
+            return False
 
     def draw(self):
         self.screen.fill(COLOR_BG)
@@ -348,29 +361,60 @@ class TransitAuditSimulation:
 
         pygame.display.flip()
 
+    def record_frame(self):
+        view = pygame.surfarray.array3d(self.screen)
+        view = view.transpose([1, 0, 2])
+        self.frames_buffer.append(view)
+
+    def save_gif(self, filename="simulation.gif", target_fps=8):
+        if not self.frames_buffer:
+            print("[-] Frames buffer is empty, nothing to save.")
+            return
+
+        # Гарантированное сохранение в корень проекта
+        file_path = os.path.abspath(__file__)
+        if ".venv" in file_path:
+            base_dir = os.path.dirname(os.path.dirname(file_path))
+        else:
+            base_dir = os.path.dirname(file_path)
+
+        output_path = os.path.join(base_dir, filename)
+
+        print(f"\n[+] Compiling GIF from {len(self.frames_buffer)} frames...")
+        sampled_frames = self.frames_buffer[::2]
+        imageio.mimsave(output_path, sampled_frames, fps=target_fps, loop=0)
+        print(f"[✓] Successfully saved to: {output_path}")
+
     def run(self):
         running = True
         paused = False
-        while running:
-            self.clock.tick(FPS)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif event.type == pygame.KEYDOWN:
-                    # Physical scancodes 15 (macOS) and 19 (Windows/Linux) ensure 'R' works in any keyboard layout
-                    if event.key == pygame.K_r or event.scancode in [15, 19]:
-                        self.reset()
-                        paused = False
-                    elif event.key == pygame.K_SPACE or event.key == pygame.K_TAB:
-                        paused = not paused
+        try:
+            while running:
+                self.clock.tick(FPS)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_r or event.scancode in [15, 19]:
+                            self.reset()
+                            paused = False
+                        elif event.key == pygame.K_SPACE or event.key == pygame.K_TAB:
+                            paused = not paused
 
-            if not paused:
-                self.update()
-            self.draw()
+                if not paused:
+                    is_active = self.update()
+                    if is_active is False:
+                        running = False
 
-        pygame.quit()
-        sys.exit()
+                self.draw()
+
+                if len(self.frames_buffer) < 400:
+                    self.record_frame()
+        finally:
+            self.save_gif("simulation.gif", target_fps=8)
+            pygame.quit()
+
 
 if __name__ == "__main__":
-    game = TransitAuditSimulation()
+    game = BusGridPlayer()
     game.run()
