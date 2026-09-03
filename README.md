@@ -2,7 +2,7 @@
 
 A discrete agent-based simulation framework modeling passenger turnover dynamics, aperture constraints, and inspection coverage efficacy within articulated transit vehicles.
 
-![Simulation Demo](simulation.gif)
+![Transit Simulation](simulation.gif)
 
 ## Research Objectives
 - **Spatial Vulnerability Mapping:** Evaluating how interior layouts (cabin dividers, seating rows, aisle widths) create visual occlusion zones.
