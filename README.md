@@ -12,3 +12,6 @@ A discrete agent-based simulation framework modeling passenger turnover dynamics
 ## Key Metrics
 - **Interception Rate:** Percentage of non-validated agents inspected prior to terminal disembarkation.
 - **Slippage Frequency:** Probability of an agent exploiting single-door entry latency to egress through alternate apertures.
+
+
+DOI: https://doi.org/10.13140/RG.2.2.33086.24640
