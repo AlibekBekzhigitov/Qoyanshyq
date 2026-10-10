@@ -288,7 +288,7 @@ def mean_ci(d):
 
 
 def diff_ci(a, b):
-    d = b["p"] - a["p"]
+    d = b["p"] - a["pfind . -iname "*monte*""]
     se = math.sqrt(a["se"] ** 2 + b["se"] ** 2)
     return d, d - Z95 * se, d + Z95 * se
 
