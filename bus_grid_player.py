@@ -411,7 +411,7 @@ class BusGridPlayer:
                 if len(self.frames_buffer) < 400:
                     self.record_frame()
         finally:
-            self.save_gif("simulation.gif", target_fps=8)
+            self.save_gif("BusRouteSimulation/simulation.gif", target_fps=8)
             pygame.quit()
 
 

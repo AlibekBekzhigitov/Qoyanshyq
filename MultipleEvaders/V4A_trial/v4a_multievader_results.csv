@@ -1,0 +1,21 @@
+bus,n_evaders,predator_share,load_factor,check_policy,tau_interlock,capture_rate_pct,avg_caught,alighting_delay_s
+Class-I (Citaro K 10.63m 2D),4,0.5,0.45,nearest,0.0,18.108333333333334,0.7243333333333334,0.0
+Class-I (Citaro K 10.63m 2D),4,0.5,0.45,front_to_back,0.0,18.108333333333334,0.7243333333333334,0.0
+Class-I (Citaro K 10.63m 2D),4,0.5,0.45,random,0.0,10.891666666666666,0.43566666666666665,0.0
+Class-I (Citaro K 10.63m 2D),4,0.5,0.45,nearest+lock_8s,8.0,18.633333333333333,0.7453333333333333,4.0
+Class-IIa (eCitaro 12.14m 2D),4,0.5,0.45,nearest,0.0,16.25,0.65,0.0
+Class-IIa (eCitaro 12.14m 2D),4,0.5,0.45,front_to_back,0.0,16.25,0.65,0.0
+Class-IIa (eCitaro 12.14m 2D),4,0.5,0.45,random,0.0,9.458333333333334,0.37833333333333335,0.0
+Class-IIa (eCitaro 12.14m 2D),4,0.5,0.45,nearest+lock_8s,8.0,16.833333333333332,0.6733333333333333,4.0
+Class-IIb (eCitaro 12.14m 3D),4,0.5,0.45,nearest,0.0,16.225,0.649,0.0
+Class-IIb (eCitaro 12.14m 3D),4,0.5,0.45,front_to_back,0.0,16.225,0.649,0.0
+Class-IIb (eCitaro 12.14m 3D),4,0.5,0.45,random,0.0,9.108333333333334,0.36433333333333334,0.0
+Class-IIb (eCitaro 12.14m 3D),4,0.5,0.45,nearest+lock_8s,8.0,16.516666666666666,0.6606666666666666,5.333333333333333
+Class-IIIa (eCitaro G 18.13m 3D),4,0.5,0.45,nearest,0.0,9.833333333333332,0.3933333333333333,0.0
+Class-IIIa (eCitaro G 18.13m 3D),4,0.5,0.45,front_to_back,0.0,9.833333333333332,0.3933333333333333,0.0
+Class-IIIa (eCitaro G 18.13m 3D),4,0.5,0.45,random,0.0,4.775,0.191,0.0
+Class-IIIa (eCitaro G 18.13m 3D),4,0.5,0.45,nearest+lock_8s,8.0,10.291666666666668,0.4116666666666667,5.333333333333333
+Class-IIIb (eCitaro G 18.13m 4D),4,0.5,0.45,nearest,0.0,9.833333333333332,0.3933333333333333,0.0
+Class-IIIb (eCitaro G 18.13m 4D),4,0.5,0.45,front_to_back,0.0,9.833333333333332,0.3933333333333333,0.0
+Class-IIIb (eCitaro G 18.13m 4D),4,0.5,0.45,random,0.0,4.483333333333333,0.17933333333333334,0.0
+Class-IIIb (eCitaro G 18.13m 4D),4,0.5,0.45,nearest+lock_8s,8.0,10.041666666666666,0.40166666666666667,6.0

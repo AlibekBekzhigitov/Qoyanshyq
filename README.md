@@ -11,11 +11,11 @@ A coupled continuous-discrete simulation framework (**Qoyanshyq Engine**) for mo
 
 ## 🚀 Dual-Scale Macro-Micro Simulation Framework
 
-The repository spans three generations of evaluation engines: the statistical **Paired CRN Monte Carlo Audit** (`qoyanshyq_monte_carlo.py`, v3.2), the continuous dual-scale model (`Euclidean_dimension.py`, v3.0), and the baseline discrete grid automaton (`bus_grid_player.py`, v1.0).
+The repository spans three generations of evaluation engines: the statistical **Paired CRN Monte Carlo Audit** (`qoyanshyq_monte_carlo.py`, v3.2), the continuous dual-scale model (`BusRouteSimulation/Euclidean_dimension.py`, v3.0), and the baseline discrete grid automaton (`bus_grid_player.py`, v1.0).
 
-| **Continuous Dual-Scale Model (`macro_micro_simulation.gif`)** | **Baseline Discrete Model (`simulation.gif`)** |
+| **Continuous Dual-Scale Model (`BusRouteSimulation/macro_micro_simulation.gif`)** | **Baseline Discrete Model (`BusRouteSimulation/simulation.gif`)** |
 |:---:|:---:|
-| ![Macro-Micro Simulation](macro_micro_simulation.gif) | ![Discrete Simulation](simulation.gif) |
+| ![Macro-Micro Simulation](BusRouteSimulation/macro_micro_simulation.gif) | ![Discrete Simulation](BusRouteSimulation/simulation.gif) |
 | *2D Euclidean Street Map coupled with Micro Cabin Audit* | *Discrete Grid Automaton (Baseline)* |
 
 ---
@@ -29,7 +29,7 @@ Anchors the interior timing-race and line-of-sight model to five public Daimler 
 - **Sequenced Aperture Control (`Interlocked Boarding`):** Evaluates secondary-door release delays ($\tau \in \{0, 2, 3, 4, 5, 6, 8\}\,\text{s}$) without increasing squad size ($k = 2$).
 - **Multi-Seed Robustness:** Verifies cross-seed invariance across 5 independent master seeds (`20261009..20261013`, $50{,}000$ trials/cell).
 
-### 2. Macro-Micro Engine (`Euclidean_dimension.py` — v3.0)
+### 2. Macro-Micro Engine (`BusRouteSimulation/Euclidean_dimension.py` — v3.0)
 Operates simultaneously across two spatial scales:
 - **Macro Scale (2D Street Network):**
   - Uses arc-length parameterization along a continuous 2D polyline urban route with turns and river crossings.
