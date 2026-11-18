@@ -1,0 +1,16 @@
+vehicle_class,policy,n_seeds,total_trials,mean_pct,sd_pp
+Class-I (Citaro K 10.63m 2D),single_door,5,50000,87.008,0.4868469985529343
+Class-I (Citaro K 10.63m 2D),independent_random,5,50000,36.738,0.5352756299328406
+Class-I (Citaro K 10.63m 2D),distinct_random,5,50000,0.0,0.0
+Class-IIa (eCitaro 12.14m 2D),single_door,5,50000,89.03399999999999,0.4121043557158815
+Class-IIa (eCitaro 12.14m 2D),independent_random,5,50000,35.525999999999996,0.5937423683720067
+Class-IIa (eCitaro 12.14m 2D),distinct_random,5,50000,0.0,0.0
+Class-IIb (eCitaro 12.14m 3D),single_door,5,50000,88.87800000000001,0.24386471659507977
+Class-IIb (eCitaro 12.14m 3D),independent_random,5,50000,74.118,0.5516067439761733
+Class-IIb (eCitaro 12.14m 3D),distinct_random,5,50000,68.36,0.3763641853311752
+Class-IIIa (eCitaro G 18.13m 3D),single_door,5,50000,95.02799999999999,0.10756393447619438
+Class-IIIa (eCitaro G 18.13m 3D),independent_random,5,50000,69.066,0.3478936619140959
+Class-IIIa (eCitaro G 18.13m 3D),distinct_random,5,50000,62.632000000000005,0.6061930385611507
+Class-IIIb (eCitaro G 18.13m 4D),single_door,5,50000,95.14,0.23526580712037637
+Class-IIIb (eCitaro G 18.13m 4D),independent_random,5,50000,82.172,0.2607105674881641
+Class-IIIb (eCitaro G 18.13m 4D),distinct_random,5,50000,79.614,0.2707951255100421
