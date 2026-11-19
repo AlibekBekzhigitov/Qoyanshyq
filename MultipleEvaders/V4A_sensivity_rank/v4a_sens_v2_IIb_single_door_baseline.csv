@@ -1,0 +1,14 @@
+parameter,range,category,slip_lo,slip_hi,slip_lo_se,slip_hi_se,slip_swing,slip_ci95,slip_sig,chk_lo,chk_hi,chk_lo_se,chk_hi_se,chk_swing,chk_ci95,chk_sig
+Stop dwell window,0.7 to 1.3,"Operational logs (APC/AVL, aggregated; low privacy risk)",88.46,88.543,0.18,0.179,0.083,0.498,False,6.373,7.467,0.136,0.148,1.093,0.393,True
+Seated load factor,0.35 to 0.65,"Operational logs (APC/AVL, aggregated; low privacy risk)",88.047,89.107,0.183,0.178,1.06,0.5,True,7.613,6.193,0.147,0.136,-1.42,0.392,True
+Ticket-check service time,0.7 to 1.3,Depot timing trial (volunteers + consent),88.133,88.523,0.184,0.181,0.39,0.505,False,7.557,6.513,0.149,0.137,-1.043,0.397,True
+Inspector boarding delay,0.7 to 1.3,Depot timing trial (volunteers + consent),87.27,89.34,0.187,0.177,2.07,0.504,True,8.187,6.15,0.152,0.136,-2.037,0.4,True
+Inspector walking speed,0.7 to 1.3,Depot timing trial (volunteers + consent),89.267,88.173,0.175,0.183,-1.093,0.497,True,6.073,7.4,0.134,0.147,1.327,0.39,True
+Inspector blind delay t_blind,0.7 to 1.3,Depot timing trial (volunteers + consent),88.807,88.303,0.178,0.183,-0.503,0.5,True,6.813,6.9,0.14,0.142,0.087,0.392,False
+Evader free walking speed,0.7 to 1.3,Literature-anchored (published walking speeds),87.033,89.647,0.19,0.175,2.613,0.506,True,8.42,5.893,0.156,0.133,-2.527,0.401,True
+Evaders per stop,2 to 4,Behavioural assumption (not directly observable),88.235,88.867,0.227,0.154,0.632,0.537,True,7.155,6.7,0.18,0.119,-0.455,0.423,True
+Novice share of evaders,0.2 to 0.4,Behavioural assumption (not directly observable),90.933,86.457,0.163,0.194,-4.477,0.497,True,6.04,7.363,0.133,0.146,1.323,0.387,True
+Vigilant share of evaders,0.1 to 0.3,Behavioural assumption (not directly observable),88.7,88.57,0.18,0.184,-0.13,0.504,False,6.68,6.79,0.139,0.142,0.11,0.39,False
+Novice miss probability,0.14 to 0.26,Behavioural assumption (not directly observable),90.13,87.067,0.169,0.192,-3.063,0.501,True,6.63,7.153,0.14,0.145,0.523,0.396,True
+Evader reaction-time scale,0.7 to 1.3,Behavioural assumption (not directly observable),88.877,88.41,0.178,0.182,-0.467,0.499,False,6.653,6.977,0.139,0.142,0.323,0.391,False
+Vigilant seat-choice sharpness,2.1 to 3.9,Behavioural assumption (not directly observable),88.67,88.527,0.179,0.182,-0.143,0.501,False,6.823,6.72,0.141,0.14,-0.103,0.389,False
