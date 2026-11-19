@@ -40,21 +40,36 @@ Operates simultaneously across two spatial scales:
 
 ---
 
-### Part II — Multi-Evader & Route-Level Extension (v4.1)
+### Part II — Multi-Evader, Route-Level & Sensitivity Extension (v4.1)
 
 #### 4. Single-Stop Sequential Verification Audit (`MultipleEvaders/V4A_slipscale/qoyanshyq_v4a_newscale.py` — v4a)
 Extends the v3.2 single-stop engine to $E = 3$ heterogeneous fare evaders embedded in a compliant passenger flow (`load` $\in \{0.2, 0.5, 0.8\}$):
 - **Indistinguishable Verification Queue:** Inspectors cannot visually distinguish evaders from paying riders and spend $\mu_s = 5.0\,\text{s}$ per ticket check sequentially (`nearest`, `sweep`, or `random` target selection).
 - **Behavioral Profiles & Seat Choice:** Contrasts `Novice` ($p_{\text{miss}} = 0.20$), `Typical` (v3.2 baseline), and `Vigilant` ($\beta = 3.0$ logit seat preference) populations, partitioning outcomes into **Slipped**, **Checked**, and **Remaining Aboard** at dwell expiration.
 
-#### 5. Multi-Stop Route Dynamics & Coverage Gap Mapping (`MultipleEvaders/V4A_gapcoverage/v41_route_final.py` — v4b)
+#### 5. Standardized Sensitivity Ranking & Low-Cost Validation Audit (`MultipleEvaders/V4A_sensivity_rank/v4a_sensitive_rank.py` & `MultipleEvaders/V4A_slipscale/sensitivy_ranking_fast.py` — v4a)
+Evaluates parameter dominance across 13 decomposed behavioral, physical, and operational levers ($\pm 30\%$ standardized perturbations, $N = 10{,}000\text{--}20{,}000$/point, 95% cluster-robust confidence intervals):
+- **Regime Shift (Psychology vs. Physics):** Demonstrates that while behavioral inattention ($p_{\text{miss}}$, $5.15\,\text{pp}$ swing) leads slippage in uncrowded single-door stops (`R1`), peak-hour crowding (`R3`) shifts dominance to directly measurable physical kinematics — free walking speed (`agent_speed`, $13.02\,\text{pp}$) and stop dwell duration (`dwell`, $9.79\,\text{pp}$).
+- **Privacy-Preserving Calibration Protocol:** Proves that high-accuracy calibration requires zero passenger video surveillance (GDPR-safe), relying solely on aggregated operator APC/AVL logs (`load`, `dwell`) and parked-depot volunteer timing trials (`insp_speed`, `service_mean`, `queue_mean`).
+- **Bulkhead Occlusion Sensitivity ($\Delta P$ vs. $t_{\text{blind}}$):** Isolates the driver cabin partition penalty across deterministic re-acquisition delays ($0.0\text{--}5.0\,\text{s}$), showing statistical neutrality under `single_door` boarding in Class-IIb ($-0.15 \pm 0.50\,\text{pp}$) versus significant positive occlusion under multi-door `distinct_random` sweeps ($+0.40 \pm 0.12\,\text{pp}$).
+
+#### 6. Multi-Stop Route Dynamics & Coverage Gap Mapping (`MultipleEvaders/V4A_gapcoverage/v41_route_final.py` — v4b)
 Carries uninspected riders across a **16-stop urban route** with inter-stop transit legs, stochastic raid arrivals ($q$), and full-route Weidmann crowding:
 - **Patrol Scarcity vs. Cabin Geometry:** Decomposes total evasion into *Never Encountered* ($\approx 43\%$) and *Evaded Active Raid* ($\approx 47\text{--}52\%$).
 - **Crowding Sign-Reversal:** Demonstrates that while high cabin load shields evaders during a single stop via ticket-check queuing (`v4a`), sustained route-level crowding increases conditional capture during raids (`13.4% → 16.2%` in Class-I) due to Weidmann egress impedance.
 - **2D Spatial Coverage Gap Heatmaps:** Maps localized capture deficits behind the driver bulkhead and articulated bellows (`v4b_coverage_gap_heatmap.png`).
 
-#### 6. Multi-Evader Dual-Scale Visualizer (`BusRouteSimulation/new_simulation_multiple_evaders.py` — v4.1)
+#### 7. Multi-Evader Dual-Scale Visualizer (`BusRouteSimulation/new_simulation_multiple_evaders.py` — v4.1)
 - Coupled 16-stop macro-micro simulator rendering concurrent `Novice`, `Typical`, and `Vigilant` evaders, real-time line-of-sight rays (`GREEN` clear vs. `RED` bulkhead-occluded), door-holding constraints, and sequential ticket-check queues (`macro_micro_v4.gif`).
+
+---
+
+## 📈 Sensitivity & Bulkhead Occlusion Diagnostics (v4a)
+
+| **13-Parameter Standardized Tornado Ranking (95% CI)** | **Bulkhead Effect $\Delta P$ vs. Re-Acquisition Delay $t_{\text{blind}}$** |
+|:---:|:---:|
+| ![Sensitivity Tornado v4a](MultipleEvaders/V4A_sensivity_rank/v4a_sens_v2_IIb_single_door_baseline.png) | ![Bulkhead dP v4a](MultipleEvaders/V4A_sensivity_rank/v4a_bulkhead_dP_IIb_single_door_baseline.png) |
+| *Decomposed $P_{\text{slip}}$ & $P_{\text{checked}}$ Swings with `n.s.` Noise Floor* | *Partition Penalty Across Deterministic $t_{\text{blind}} \in [0, 5]\,\text{s}$* |
 
 ---
 
@@ -91,6 +106,18 @@ Carries uninspected riders across a **16-stop urban route** with inter-stop tran
 | **Class-IIIa** (18.13m 3D) | 91.48 / 3.78 / 4.73 | 86.00 / 6.62 / 7.38 | 4.55 / 51.88 / 43.56 | **5.47** / **9.78** |
 | **Class-IIIb** (18.13m 4D) | 91.10 / 4.08 / 4.82 | 89.62 / 5.18 / 5.20 | 4.77 / 51.76 / 43.47 | **4.89** / **8.77** |
 
+### Table 3 — Multi-Regime Standardized Sensitivity Ranking (v4a, Class-IIb eCitaro 12.14m 3D, $N = 20{,}000$/point)
+
+| Parameter / Lever | Calibration Source & Privacy Risk | `R1` Single-Door Baseline ($P_{\text{slip}}$ Swing) | `R2` Distinct-Random Baseline ($P_{\text{slip}}$ Swing) | `R3` Single-Door Crowded ($P_{\text{slip}}$ Swing) |
+| :--- | :--- | :---: | :---: | :---: |
+| **Free Walking Speed** (`agent_speed`) | Literature (Weidmann / Fruin) | $2.94\,\text{pp}$ (#2) | **$7.10\,\text{pp}$** (#1) | **$13.02\,\text{pp}$** (#1) |
+| **Stop Dwell Window** (`dwell_lo, hi`) | APC / AVL Logs (Low risk) | $0.11\,\text{pp}$ (*n.s.*) | $2.13\,\text{pp}$ (#3) | **$9.79\,\text{pp}$** (#2) |
+| **Inattention Rate** (`p_miss` / `novice`) | Unobservable Behavioral | **$5.15\,\text{pp}$** (#1) | $4.87\,\text{pp}$ (#2) | $4.45\,\text{pp}$ (#3) |
+| **Cabin Load Factor** (`load`) | APC / AVL Logs (Low risk) | $1.09\,\text{pp}$ (#3) | $1.70\,\text{pp}$ (#4) | $0.58\,\text{pp}$ (#6) |
+| **Inspector Walking Speed** (`insp_speed`) | Parked Depot Trial (Consent) | $1.00\,\text{pp}$ (#4) | $1.02\,\text{pp}$ (#6) | $0.67\,\text{pp}$ (#5) |
+| **Ticket-Check Service Time** (`service_mean`) | Parked Depot Trial (Consent) | $0.59\,\text{pp}$ (#5) | $1.25\,\text{pp}$ (#5) | $0.71\,\text{pp}$ (#4) |
+| **Inspector Blind Delay** (`t_blind`) | Parked Depot Trial (Consent) | $0.03\,\text{pp}$ (*n.s.*) | $0.13\,\text{pp}$ (*n.s.*) | $0.20\,\text{pp}$ (*n.s.*) |
+
 ---
 
 ## ⚡ Quickstart & Reproduction
@@ -106,8 +133,11 @@ python TrialModelBus/upd_montecarlo_bus_standart.py
 # 2. Multi-Evader Single-Stop Verification Queue Audit (v4a)
 python MultipleEvaders/V4A_slipscale/qoyanshyq_v4a_newscale.py
 
-# 3. Multi-Stop Route Dynamics & Coverage Gap Heatmap (v4b)
+# 3. Standardized Sensitivity Ranking & Bulkhead dP Audit (v4a)
+python MultipleEvaders/V4A_sensivity_rank/v4a_sensitive_rank.py --class IIb --policy single_door --n 20000
+
+# 4. Multi-Stop Route Dynamics & Coverage Gap Heatmap (v4b)
 python MultipleEvaders/V4A_gapcoverage/v41_route_final.py
 
-# 4. Interactive Dual-Scale Multi-Evader Visualization (v4.1)
+# 5. Interactive Dual-Scale Multi-Evader Visualization (v4.1)
 python BusRouteSimulation/new_simulation_multiple_evaders.py
