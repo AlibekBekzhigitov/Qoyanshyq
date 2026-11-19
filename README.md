@@ -14,7 +14,7 @@ A coupled continuous-discrete simulation framework (**Qoyanshyq Engine**) for mo
 
 | **Multi-Evader & Queue Audit (`macro_micro_v4.gif`, v4.1)** | **Single-Agent Dual-Scale (`macro_micro_simulation.gif`, v3.0)** | **Baseline Grid Automaton (`simulation.gif`, v1.0)** |
 |:---:|:---:|:---:|
-| ![Multi-Evader v4.1](BusRouteSimulation/macro_micro_v4.gif) | ![Macro-Micro v3.0](macro_micro_simulation.gif) | ![Discrete v1.0](simulation.gif) |
+| ![Multi-Evader v4.1](BusRouteSimulation/macro_micro_v4.gif) | ![Macro-Micro v3.0](BusRouteSimulation/macro_micro_simulation.gif) | ![Discrete v1.0](BusRouteSimulation/simulation.gif) |
 | *16-Stop Corridor, $E=3$ Profiles, LOS Rays & Ticket Queue* | *20-Stop Euclidean Route + Single Audit Node* | *Single-Scale Discrete Cellular Grid* |
 
 ---
@@ -51,25 +51,30 @@ Extends the v3.2 single-stop engine to $E = 3$ heterogeneous fare evaders embedd
 Evaluates parameter dominance across 13 decomposed behavioral, physical, and operational levers ($\pm 30\%$ standardized perturbations, $N = 10{,}000\text{--}20{,}000$/point, 95% cluster-robust confidence intervals):
 - **Regime Shift (Psychology vs. Physics):** Demonstrates that while behavioral inattention ($p_{\text{miss}}$, $5.15\,\text{pp}$ swing) leads slippage in uncrowded single-door stops (`R1`), peak-hour crowding (`R3`) shifts dominance to directly measurable physical kinematics — free walking speed (`agent_speed`, $13.02\,\text{pp}$) and stop dwell duration (`dwell`, $9.79\,\text{pp}$).
 - **Privacy-Preserving Calibration Protocol:** Proves that high-accuracy calibration requires zero passenger video surveillance (GDPR-safe), relying solely on aggregated operator APC/AVL logs (`load`, `dwell`) and parked-depot volunteer timing trials (`insp_speed`, `service_mean`, `queue_mean`).
-- **Bulkhead Occlusion Sensitivity ($\Delta P$ vs. $t_{\text{blind}}$):** Isolates the driver cabin partition penalty across deterministic re-acquisition delays ($0.0\text{--}5.0\,\text{s}$), showing statistical neutrality under `single_door` boarding in Class-IIb ($-0.15 \pm 0.50\,\text{pp}$) versus significant positive occlusion under multi-door `distinct_random` sweeps ($+0.40 \pm 0.12\,\text{pp}$).
+- **Bulkhead Occlusion Sensitivity ($\Delta P$ vs. $t_{\text{blind}}$):** Isolates the driver cabin partition penalty across deterministic re-acquisition delays ($0.0\text{--}5.0\,\text{s}$) across `single_door` baseline, `single_door` crowded, and `distinct_random` sweeps.
 
 #### 6. Multi-Stop Route Dynamics & Coverage Gap Mapping (`MultipleEvaders/V4A_gapcoverage/v41_route_final.py` — v4b)
 Carries uninspected riders across a **16-stop urban route** with inter-stop transit legs, stochastic raid arrivals ($q$), and full-route Weidmann crowding:
 - **Patrol Scarcity vs. Cabin Geometry:** Decomposes total evasion into *Never Encountered* ($\approx 43\%$) and *Evaded Active Raid* ($\approx 47\text{--}52\%$).
 - **Crowding Sign-Reversal:** Demonstrates that while high cabin load shields evaders during a single stop via ticket-check queuing (`v4a`), sustained route-level crowding increases conditional capture during raids (`13.4% → 16.2%` in Class-I) due to Weidmann egress impedance.
-- **2D Spatial Coverage Gap Heatmaps:** Maps localized capture deficits behind the driver bulkhead and articulated bellows (`v4b_coverage_gap_heatmap.png`).
+- **2D Spatial Coverage Gap Heatmaps:** Maps localized capture deficits behind the driver bulkhead and articulated bellows (`MultipleEvaders/V4A_gapcoverage/v4b_coverage_gap_heatmap.png`).
 
 #### 7. Multi-Evader Dual-Scale Visualizer (`BusRouteSimulation/new_simulation_multiple_evaders.py` — v4.1)
-- Coupled 16-stop macro-micro simulator rendering concurrent `Novice`, `Typical`, and `Vigilant` evaders, real-time line-of-sight rays (`GREEN` clear vs. `RED` bulkhead-occluded), door-holding constraints, and sequential ticket-check queues (`macro_micro_v4.gif`).
+- Coupled 16-stop macro-micro simulator rendering concurrent `Novice`, `Typical`, and `Vigilant` evaders, real-time line-of-sight rays (`GREEN` clear vs. `RED` bulkhead-occluded), door-holding constraints, and sequential ticket-check queues (`BusRouteSimulation/macro_micro_v4.gif`).
 
 ---
 
-## 📈 Sensitivity & Bulkhead Occlusion Diagnostics (v4a)
+## 📈 Visual Diagnostics & Sensitivity Heatmaps (v4a & v4b)
 
-| **13-Parameter Standardized Tornado Ranking (95% CI)** | **Bulkhead Effect $\Delta P$ vs. Re-Acquisition Delay $t_{\text{blind}}$** |
+| **13-Parameter Tornado Ranking — Baseline (`single_door`, v4a)** | **13-Parameter Tornado Ranking — Crowded (`single_door`, v4a)** |
 |:---:|:---:|
-| ![Sensitivity Tornado v4a](MultipleEvaders/V4A_sensivity_rank/v4a_sens_v2_IIb_single_door_baseline.png) | ![Bulkhead dP v4a](MultipleEvaders/V4A_sensivity_rank/v4a_bulkhead_dP_IIb_single_door_baseline.png) |
-| *Decomposed $P_{\text{slip}}$ & $P_{\text{checked}}$ Swings with `n.s.` Noise Floor* | *Partition Penalty Across Deterministic $t_{\text{blind}} \in [0, 5]\,\text{s}$* |
+| ![Sensitivity Baseline](MultipleEvaders/V4A_sensivity_rank/v4a_sens_v2_IIb_single_door_baseline.png) | ![Sensitivity Crowded](MultipleEvaders/V4A_sensivity_rank/v4a_sens_v2_IIb_single_door_crowded.png) |
+| *Uncrowded (`load=0.50`): Behavioral `novice`/`p_miss` leads $P_{\text{slip}}$* | *Peak Hour (`load=0.80`): Observable `agent_speed` & `dwell` dominate* |
+
+| **Bulkhead Effect $\Delta P$ vs. $t_{\text{blind}}$ (`distinct_random`, v4a)** | **2D Spatial Coverage Gap Heatmap (16-Stop Route, v4b)** |
+|:---:|:---:|
+| ![Bulkhead Distinct Random](MultipleEvaders/V4A_sensivity_rank/v4a_bulkhead_dP_IIb_distinct_random_baseline.png) | ![Coverage Gap Heatmap](MultipleEvaders/V4A_gapcoverage/v4b_coverage_gap_heatmap.png) |
+| *Partition Occlusion Shift Across Multi-Door Sweeps* | *Localized Capture Deficits Behind Bulkhead & Articulated Bellows* |
 
 ---
 
