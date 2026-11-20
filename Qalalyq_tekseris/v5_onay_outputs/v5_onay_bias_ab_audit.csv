@@ -1,0 +1,4 @@
+bus_code,bus_label,blind_trips,raid_trips,naive_apc_billing_gap_pct,local_panic_lift_pp,true_cabin_evader_pct
+Mini_2D,"Mini Bus (9m, 2D)",3626,374,19.32,13.72,16.24
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3627,373,18.1,13.33,16.28
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",3609,391,16.8,12.74,16.54

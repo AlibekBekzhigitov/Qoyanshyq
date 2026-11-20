@@ -1,0 +1,16 @@
+bus_code,bus_label,doors,capacity,block_delay_s,avg_paid_tx,avg_panic_paid,avg_fined,operator_fare_rev_kzt,state_fine_rev_kzt
+Mini_2D,"Mini Bus (9m, 2D)",2,55,0.0,71.206,0.0,1.91,8544.66,7067.0
+Mini_2D,"Mini Bus (9m, 2D)",2,55,3.0,71.523,0.2,1.908,8582.76,7060.52
+Mini_2D,"Mini Bus (9m, 2D)",2,55,6.0,73.546,2.129,1.602,8825.58,5929.25
+Mini_2D,"Mini Bus (9m, 2D)",2,55,9.0,74.683,3.075,1.174,8961.99,4342.88
+Mini_2D,"Mini Bus (9m, 2D)",2,55,12.0,75.03,3.46,0.932,9003.57,3447.48
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3,95,0.0,130.43,0.0,1.994,15651.66,7377.8
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3,95,3.0,130.523,0.273,1.992,15662.7,7371.32
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3,95,6.0,133.663,3.529,1.923,16039.59,7114.18
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3,95,9.0,135.58,5.549,1.622,16269.63,6002.32
+Standard_12m_3D,"Standard Yutong/GD (12m, 3D)",3,95,12.0,136.447,6.289,1.29,16373.61,4771.15
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",4,160,0.0,227.735,0.0,1.991,27328.2,7367.62
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",4,160,3.0,227.782,0.432,1.991,27333.78,7366.7
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",4,160,6.0,232.305,4.84,1.976,27876.57,7313.05
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",4,160,9.0,237.047,9.224,1.832,28445.64,6778.4
+Articulated_18m_4D,"Articulated Bus (18m, 4D)",4,160,12.0,238.418,10.761,1.531,28610.1,5664.7
