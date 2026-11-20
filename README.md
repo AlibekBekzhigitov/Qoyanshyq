@@ -127,6 +127,46 @@ Carries uninspected riders across a **16-stop urban route** with inter-stop tran
 
 ## ⚡ Quickstart & Reproduction
 
+---
+
+### Part III — Digital Tap-In Telemetry & Last-Second Compliance Extension (`v5.0` — Kazakhstan Onay / CTS Realities)
+
+#### 8. Transaction-Stream Audit & Validator Lockout Optimization (`Onay_Telemetry_v5/v5_onay_telemetry.py` — v5.0)
+Adapts the **Qoyanshyq Engine** from European open Proof-of-Payment door-egress physics (`v3.2`–`v4.1`) to municipal electronic tap-in and QR/SMS fare-collection networks (such as Almaty's **Onay** and Astana's **CTS**) across three local fleet classes: **Mini Bus (9.0 m, 2D)**, **Standard Yutong / Golden Dragon (12.0 m, 3D)**, and **Articulated Bus (18.0 m, 4D)**:
+- **Last-Second Digital Compliance vs. Door Egress:** Replaces physical door escape with a timing race ($t_{\text{notice}} + t_{\text{channel}} < \tau_{\text{block}} + \Delta \tau_{\text{zone}}$) between rapid mobile QR/app/SMS transactions upon spotting inspectors and remote validator lockout ($\tau_{\text{block}} \in \{0, 3, 6, 9, 12\}\,\text{s}$).
+- **Split Incentive & Protocol Bottleneck Audit:** Accounts for Kazakhstan's institutional split where fare revenue ($120\,\text{KZT}$) accrues directly to the transit operator while administrative fines ($3{,}700\,\text{KZT}$) go to the state budget and consume $\approx 75\,\text{s}$ of squad processing capacity per offender (capping squads at $\approx 1.99$ fines per raid). Delaying validator lockout by $6\text{--}9\,\text{s}$ unlocks up to $9.22\text{--}10.76$ voluntary panic QR/app payments per raid in 18 m articulated buses, directly increasing carrier fare revenue.
+- **Four-Cluster Decomposition & Bias-Free A/B Evasion Estimator:** Separates door APC counts into regular payers ($\pi_{\text{paid}} = 0.58$), zero-fare concession taps ($\pi_{\text{zero\_tap}} = 0.18$), unvalidated preschool children/exempt riders ($\pi_{\text{no\_tap}} = 0.09$, sensor detection $p_{\text{child}} = 0.55$), and latent evaders ($\pi_{\text{evade}} = 0.15$). Contrasting validation lift on sparse ($\sim 10\%$) raided trips against uninspected corridor trips eliminates the $+1.8\text{--}3.1\,\text{pp}$ upward masking bias in naive APC–billing subtraction without cabin cameras.
+- **Preprint Manuscript (`Overleaf / pdfLaTeX`):** Full LaTeX source archived at `Onay_Telemetry_v5/qoyanshyq_v5_part3_kz.tex` (*Preprint Part III DOI: `[Insert Part III DOI]`*).
+
+---
+
+## 🇰🇿 Kazakhstan Tap-In Telemetry Diagnostics & Fleet Benchmarks (`v5.0`)
+
+| **Last-Second Panic Payments vs. Protocol Fine Bottleneck (`v5.0`)** | **Direct Carrier Fare Revenue vs. State Fine Volume (`v5.0`)** |
+|:---:|:---:|
+| ![Panic vs Fines by Fleet](Onay_Telemetry_v5/fig1_panic_vs_fines_by_fleet.png) | ![Operator vs State Revenue](Onay_Telemetry_v5/fig2_operator_vs_state_revenue.png) |
+| *Lockout delay $\tau_{\text{block}} = 6\text{--}12\,\text{s}$ triggers up to $10.76$ panic QR/app payments/raid in 18 m buses* | *Carrier fare box ($120\,\text{KZT}$) rises with $\tau_{\text{block}}$ while state fine volume ($3{,}700\,\text{KZT}$) saturates* |
+
+| **Eliminating Child & Beneficiary Bias via Local Raid A/B Contrast (`v5.0`)** |
+|:---:|
+| ![Bias Elimination Audit](Onay_Telemetry_v5/fig3_bias_elimination_audit.png) |
+| *Local raid panic-payment lift cancels preschooler (`no_tap`) & concession masking bias on uninspected routes* |
+
+### Table 4 — Kazakhstan Fleet Lockout Sweep & Unbiased A/B Evasion Audit (`v5.0`, $N = 4{,}000$ trips/cell)
+
+| Fleet Class (Almaty / Astana Spec) | Lock Delay $\tau_{\text{block}}$ (s) | Paid Tx / Trip | Panic QR / App | Fined / Trip | Operator Fare Rev (KZT) | State Fines (KZT) | Naive APC Gap vs. Raid Lift |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Mini Bus** ($9.0\,\text{m}$, 2D, Cap 55) | $0.0\,\text{s}$ | 71.21 | 0.00 | 1.91 | 8,545 | 7,067 | Naive: 19.32% (Biased) |
+| | $9.0\,\text{s}$ | 74.68 | **3.08** | 1.17 | **8,962** | 4,343 | Raid Lift: **+13.72 pp** (True: 16.24%) |
+| **Standard Yutong / GD** ($12.0\,\text{m}$, 3D, Cap 95) | $0.0\,\text{s}$ | 130.43 | 0.00 | 1.99 | 15,652 | 7,378 | Naive: 18.10% (Biased) |
+| | $9.0\,\text{s}$ | 135.58 | **5.55** | 1.62 | **16,270** | 6,002 | Raid Lift: **+13.33 pp** (True: 16.28%) |
+| **Articulated Bus** ($18.0\,\text{m}$, 4D, Cap 160) | $0.0\,\text{s}$ | 227.74 | 0.00 | 1.99 | 27,328 | 7,368 | Naive: 16.80% (Biased) |
+| | $9.0\,\text{s}$ | 237.05 | **9.22** | 1.83 | **28,446** | 6,778 | Raid Lift: **+12.74 pp** (True: 16.54%) |
+
+```bash
+# 6. Kazakhstan Tap-In Telemetry, Lockout Delay & Bias-Free A/B Audit (v5.0)
+python Onay_Telemetry_v5/v5_onay_telemetry.py
+
 ```bash
 git clone [https://github.com/AlibekBekzhigitov/Qoyanshyq.git](https://github.com/AlibekBekzhigitov/Qoyanshyq.git)
 cd Qoyanshyq
